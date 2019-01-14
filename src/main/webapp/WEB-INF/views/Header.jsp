@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<%@ page session="true"%>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -14,14 +19,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
 
 	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 
 	<!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="css/font-awesom
-    e.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link type="text/css" rel="stylesheet" href="/css/style.css" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +55,7 @@
 
 					<!-- logo -->
 					<div class="nav-logo">
-						<a href="/" class="logo"><img src="img/logo.png" alt=""></a>
+						<a href="/" class="logo"><img src="/img/logo.png" alt=""></a>
 					</div>
 					<!-- /logo -->
 
@@ -84,8 +88,15 @@
 								<div class="dropdown-body">
 									<ul class="dropdown-list">
 										<li><a href="/registration">회원가입</a></li>
+										  <c:choose>
+						<c:when test="${sessionScope.userid==null}">
 										<li><a href="/login">로그인</a></li>
-										<li><a href="author.html">Author page</a></li>
+						</c:when>
+						<c:otherwise>
+									<li><a href="/member/logout.do">로그아웃</a></li>
+						</c:otherwise>
+						</c:choose>
+										<li><a href="/go">Author page</a></li>
 										<li><a href="about.html">About Us</a></li>
 										<li><a href="contact.html">Contacts</a></li>
 										<li><a href="blank.html">Regular</a></li>
@@ -113,7 +124,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href=""><img src="img/post-10.jpg" alt=""></a>
+															<a class="post-img" href=""><img src="/img/post-10.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Travel</a>
@@ -131,7 +142,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="img/post-13.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-13.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Travel</a>
@@ -150,7 +161,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="img/post-12.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-12.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">자유게시판</a>
@@ -174,7 +185,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="img/post-5.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-5.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Lifestyle</a>
@@ -192,7 +203,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="img/post-8.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-8.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Fashion</a>
@@ -211,7 +222,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="img/post-9.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-9.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Lifestyle</a>
@@ -243,8 +254,8 @@
 										<div class="col-md-3">
 											<h4 class="dropdown-heading">Categories</h4>
 											<ul class="dropdown-list">
-												<li><a href="/board/list">자유게시판</a></li>
-												<li><a href="/board/list">자유게시판</a></li>
+												<li><a href="/Category/FreeBoardList.do">자유게시판</a></li>
+												<li><a href="/Category/FreeBoardList.do">자유게시판</a></li>
 												<li><a href="#">Technology</a></li>
 												<li><a href="#">Health</a></li>
 												<li><a href="#">Travel</a></li>
@@ -324,14 +335,13 @@
 	</header>
 	<!-- /HEADER -->
 
-	
 
 
 	<!-- jQuery Plugins -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.stellar.min.js"></script>
+	<script src="/js/main.js"></script>
 
 </body>
 </html>

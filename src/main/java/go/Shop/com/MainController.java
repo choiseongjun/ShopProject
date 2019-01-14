@@ -10,4 +10,13 @@ public class MainController {
 	public String main() {
 		return "Main";
 	}
+	@RequestMapping("/go.do")
+    public String value() {
+    	System.out.println("로그로그로그");
+    	return null;
+    }
+	@RequestMapping("/go")
+	public String go() {
+		return "User/go";
+	}
 }

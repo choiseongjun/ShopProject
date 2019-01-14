@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,6 +29,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
+@Table(name = "user")
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +42,7 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
+    @Length(min = 3, message = "*Your password must have at least 3 characters")
     @NotEmpty(message = "*Please provide your password")
     @Transient
     private String password;
@@ -49,12 +51,13 @@ public class User {
     @NotEmpty(message = "*Please provide your name")
     private String name;
 
-    @Column(name = "last_name")
-    @NotEmpty(message = "*Please provide your last name")
-    private String lastName;
+    
 
     @Column(name = "active")
     private int active;
+    
+    @Column
+    private String picture;
     
     @Column
     private LocalDateTime createdDate;

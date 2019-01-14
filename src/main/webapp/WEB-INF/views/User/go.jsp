@@ -7,14 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="Header.jsp" %>
-  <c:choose>
-<c:when test="${sessionScope.userid==null}">
-준준
-</c:when>
-   <c:otherwise>
-성준준
-</c:otherwise>
-</c:choose>
+<%@ include file="../Header.jsp" %>
+<form action="go.do">
+<input type="submit" value="고고">
+</form>
 </body>
 </html>

@@ -33,5 +33,8 @@ dependencies {
     compile("org.mariadb.jdbc:mariadb-java-client")
     compile('org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc3:1.16')
      compile('org.springframework.boot:spring-boot-starter-security')
+     compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1') // MyBatis 라이브러리
+// https://mvnrepository.com/artifact/javax.mail/mail
+compile group: 'javax.mail', name: 'mail', version: '1.4.7'
 
 }
