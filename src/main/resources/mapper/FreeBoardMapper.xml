@@ -16,11 +16,13 @@
 
 
        <select id="FreeBoardList" resultType="go.Shop.com.Category.FreeBoard.Domain.boardVO"  parameterType="go.Shop.com.Configuration.SearchVO">
-         SELECT BRDNO, BRDTITLE, BRDWRITER, DATE_FORMAT(BRDDATE,'%Y-%m-%d') BRDDATE, BRDHIT
-          FROM TBL_BOARD
-    <include refid="includeBoard"/>
+          SELECT BRDNO, BRDTITLE, BRDWRITER, DATE_FORMAT(BRDDATE,'%Y-%m-%d') BRDDATE, BRDHIT
+                  , (SELECT COUNT(*) FROM TBL_BOARDFILE WHERE BRDNO=TB.BRDNO) FILECNT
+          FROM TBL_BOARD TB
+         <include refid="includeBoard"/>
+         ORDER BY BRDNO DESC 
          LIMIT ${rowStart-1}, 10
-    </select> 
+        </select> 
     
      <insert id="FreeBoardInsert" parameterType="go.Shop.com.Category.FreeBoard.Domain.boardVO" >
     	INSERT INTO TBL_BOARD(BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
@@ -56,5 +58,51 @@
           FROM TBL_BOARD
           <include refid="includeBoard"/>
     </select>
+    <select id="selectBoard1FileList" resultType="go.Shop.com.Category.FreeBoard.Domain.FileVO" parameterType="String">
+        SELECT FILENO, FILENAME, REALNAME, FILESIZE
+          FROM TBL_BOARDFILE
+         WHERE BRDNO=#{brdno}
+         ORDER BY FILENO DESC 
+    </select> 
 
+    <insert id="insertBoard1File" parameterType="go.Shop.com.Category.FreeBoard.Domain.FileVO" >
+     	INSERT INTO TBL_BOARDFILE (BRDNO, FILENAME, REALNAME, FILESIZE)
+        VALUES (#{parentPK}, #{filename}, #{realname}, #{filesize})
+	</insert>
+    <delete id="deleteBoard1File" parameterType="hashmap"> 
+        DELETE 
+          FROM TBL_BOARDFILE
+         WHERE FILENO IN (
+			  <foreach item="item" index="index" collection="fileno" separator=",">
+		        	 ${item}
+			  </foreach>  
+		)	         
+    </delete> 
+   <select id="selectBoard1ReplyList" resultType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO" parameterType="String">
+        SELECT BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE 
+          FROM TBL_BOARDREPLY
+         WHERE BRDNO=#{brdno} AND REDELETEFLAG='N'
+         ORDER BY RENO
+    </select>
+        
+    <insert id="insertBoard1Reply" parameterType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO" >
+        <selectKey resultType="String" keyProperty="reno" order="BEFORE">
+            SELECT IFNULL(MAX(RENO),0)+1 FROM TBL_BOARDREPLY
+        </selectKey>
+            
+        INSERT INTO TBL_BOARDREPLY(BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE)
+        VALUES (#{brdno}, #{reno}, #{rewriter}, 'N', #{rememo}, NOW())
+    </insert>
+
+    <update id="deleteBoard1Reply" parameterType="String"> 
+        UPDATE TBL_BOARDREPLY
+           SET REDELETEFLAG='Y' 
+         WHERE RENO=#{reno}       
+    </update> 
+
+    <update id="updateBoard1Reply" parameterType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO">
+        UPDATE TBL_BOARDREPLY
+           SET REMEMO=#{rememo} 
+         WHERE RENO=#{reno}
+    </update> 
 </mapper> 

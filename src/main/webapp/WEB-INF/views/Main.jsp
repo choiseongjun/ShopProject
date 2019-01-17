@@ -10,10 +10,10 @@
 <%@ include file="Header.jsp" %>
   <c:choose>
 <c:when test="${sessionScope.userid==null}">
-준준
+
 </c:when>
    <c:otherwise>
-성준준
+
 </c:otherwise>
 </c:choose>
 </body>

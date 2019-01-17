@@ -1,11 +1,33 @@
 package go.Shop.com.Category.FreeBoard.Domain;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import go.Shop.com.Configuration.utiletc;
 
 public class boardVO {
 	
-	private String brdno, brdtitle, brdwriter, brdmemo, brddate,brdhit, brddeleteflag;
+	private String brdno, brdtitle, brdwriter, brdmemo, brddate,brdhit, brddeleteflag,filecnt;
+	public String getFilecnt() {
+		return filecnt;
+	}
+
+	public void setFilecnt(String filecnt) {
+		this.filecnt = filecnt;
+	}
+
+	private List<MultipartFile> uploadfile;
+
   
+
+	public List<MultipartFile> getUploadfile() {
+		return uploadfile;
+	}
+
+	public void setUploadfile(List<MultipartFile> uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 
 	/**
 	 * 게시물 제목을 글자수에 맞추어 자르기

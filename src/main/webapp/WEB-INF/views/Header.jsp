@@ -83,7 +83,7 @@
 					<!-- nav -->
 					<ul class="nav-menu">
 						<li class="has-dropdown">
-							<a href="/registration">회원가입</a>
+							<a href="/registration">회원</a>
 							<div class="dropdown">
 								<div class="dropdown-body">
 									<ul class="dropdown-list">
@@ -105,13 +105,13 @@
 							</div>
 						</li>
 						<li class="has-dropdown megamenu">
-							<a href="#">Lifestyle</a>
+							<a href="#">블로그</a>
 							<div class="dropdown tab-dropdown">
 								<div class="row">
 									<div class="col-md-2">
 										<ul class="tab-nav">
-											<li class="active"><a data-toggle="tab" href="#tab1">Lifestyle</a></li>
-											<li><a data-toggle="tab" href="#tab2">Fashion</a></li>
+											<li class="active"><a data-toggle="tab" href="#tab1">회원블로그</a></li>
+											<li><a data-toggle="tab" href="#tab2">센터블로그</a></li>
 											<li><a data-toggle="tab" href="#tab1">Health</a></li>
 											<li><a data-toggle="tab" href="#tab2">Travel</a></li>
 										</ul>
@@ -123,7 +123,7 @@
 												<div class="row">
 													<!-- post -->
 													<div class="col-md-4">
-														<div class="post post-sm">
+														<div class="post post-sm"> 
 															<a class="post-img" href=""><img src="/img/post-10.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
@@ -137,12 +137,12 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post -->
+													<!-- /post --> 
 
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="/img/post-13.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-14.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Travel</a>
@@ -161,7 +161,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="/img/post-12.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-13.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">자유게시판</a>
@@ -185,7 +185,7 @@
 													<!-- post -->
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img src="/img/post-5.jpg" alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="/img/post-10.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Lifestyle</a>
@@ -247,53 +247,64 @@
 							</div>
 						</li>
 						<li class="has-dropdown megamenu">
-							<a href="#">커뮤니티</a>
+							<a href="#">종합</a>
 							<div class="dropdown">
 								<div class="dropdown-body">
 									<div class="row">
 										<div class="col-md-3">
-											<h4 class="dropdown-heading">Categories</h4>
+											<h4 class="dropdown-heading">자유</h4>
 											<ul class="dropdown-list">
 												<li><a href="/Category/FreeBoardList.do">자유게시판</a></li>
-												<li><a href="/Category/FreeBoardList.do">자유게시판</a></li>
-												<li><a href="#">Technology</a></li>
-												<li><a href="#">Health</a></li>
-												<li><a href="#">Travel</a></li>
+												<li><a href="/Category/FreeBoardList.do">입문Tip 게시판</a></li>
+												<li><a href="#">질문&답변</a></li>
+												<li><a href="#">사고 Q&A</a></li>
+												<li><a href="#">국산바이크게시판</a></li>
+												<li><a href="#">해외바이크게시판</a></li>
+											<li><a href="#">분실및도난</a></li>
 											</ul>
 										</div>
 										<div class="col-md-3">
-											<h4 class="dropdown-heading">Lifestyle</h4>
+											<h4 class="dropdown-heading">중고거래</h4>
 											<ul class="dropdown-list">
-												<li><a href="#">Lifestyle</a></li>
-												<li><a href="#">Fashion</a></li>
-												<li><a href="#">Health</a></li>
+												<li><a href="#">센터매물</a></li>
+												<li><a href="#">개인매물</a></li>
+												<li><a href="#">바이크 부품</a></li>
+												<li><a href="#">튜닝용품</a></li>
+												<li><a href="#">개인용품</a></li>																								
 											</ul>
-											<h4 class="dropdown-heading">Technology</h4>
+											<h4 class="dropdown-heading">Tip</h4>
 											<ul class="dropdown-list">
-												<li><a href="#">Lifestyle</a></li>
-												<li><a href="#">Travel</a></li>
+												<li><a href="#">중고거래Tip</a></li>
+												<li><a href="#">개인정비 Tip</a></li>
+												<li><a href="#">센터후기</a></li>
 											</ul>
 										</div>
 										<div class="col-md-3">
-											<h4 class="dropdown-heading">Fashion</h4>
+											<h4 class="dropdown-heading">정보</h4>
 											<ul class="dropdown-list">
-												<li><a href="#">Fashion</a></li>
-												<li><a href="#">Technology</a></li>
+	  											<li><a href="#">바이크 세계뉴스</a></li>
+												<li><a href="#">바이크 Review</a></li>
+												<li><a href="#">개인 바이크후기</a></li>
+												<li><a href="#">바이크튜닝후기</a></li>
+												<li><a href="#">센터 소개</a></li>
 											</ul>
 											<h4 class="dropdown-heading">Travel</h4>
 											<ul class="dropdown-list">
-												<li><a href="#">Lifestyle</a></li>
-												<li><a href="#">Healtth</a></li>
-												<li><a href="#">Fashion</a></li>
+												<li><a href="#">투어 코스 Q&A</a></li>
+												<li><a href="#">맛집&&카페 추천</a></li>
+												<li><a href="#">바이크 여행 후기</a></li>
+												<li><a href="#">전국일주 후기</a></li>
+												<li><a href="#">세계일주 후기</a></li>	
 											</ul>
 										</div>
 										<div class="col-md-3">
-											<h4 class="dropdown-heading">Health</h4>
+											<h4 class="dropdown-heading">활동</h4>
 											<ul class="dropdown-list">
-												<li><a href="#">Technology</a></li>
-												<li><a href="#">Fashion</a></li>
-												<li><a href="#">Health</a></li>
-												<li><a href="#">Travel</a></li>
+												<li><a href="#">개인바이크 사진</a></li>
+												<li><a href="#">투어 Tip</a></li>
+												<li><a href="#">번개 모집게시판</a></li>
+												<li><a href="#">번개 후기</a></li>
+												<li><a href="#">전국일주 모집</a></li>											
 											</ul>
 										</div>
 									</div>

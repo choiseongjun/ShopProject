@@ -11,8 +11,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO;
+import go.Shop.com.Category.FreeBoard.Domain.FileVO;
 import go.Shop.com.Category.FreeBoard.Domain.boardVO;
 import go.Shop.com.Category.FreeBoard.Service.BoardService;
+import go.Shop.com.Configuration.FileUtil;
 import go.Shop.com.Configuration.SearchVO;
 
 @Controller
@@ -36,22 +39,29 @@ public class BoardController {
     public String boardForm(HttpServletRequest request, ModelMap modelMap) throws Exception {
         String brdno = request.getParameter("brdno");
         if (brdno!=null) {
-            boardVO boardInfo = boardSvc.selectBoardOne(brdno);
-             modelMap.addAttribute("boardInfo", boardInfo);
+        	boardVO boardInfo = boardSvc.selectBoardOne(brdno);
+        	List<?> listview = boardSvc.selectBoard1FileList(brdno);
+             
+         	modelMap.addAttribute("boardInfo", boardInfo);
+        	modelMap.addAttribute("listview", listview);
         }
         
         return "Category/FreeboardForm";
 }
 
     
-    
+  
     @RequestMapping(value = "Category/FreeBoardSave")
-    public String boardSave(@ModelAttribute boardVO boardInfo,HttpSession session) throws Exception {
+    public String boardSave(HttpServletRequest request,@ModelAttribute boardVO boardInfo,HttpSession session) throws Exception {
+	String[] fileno = request.getParameterValues("fileno");
+    	
+	   FileUtil fs = new FileUtil();
+	 
+	   List<FileVO> filelist = fs.saveAllFiles(boardInfo.getUploadfile());
+
     	String writer=(String)session.getAttribute("userid");
     	boardInfo.setBrdwriter(writer);
-    	System.out.println("데이터 확인!!!!!!"+boardInfo.getBrdtitle());
-    	if (boardInfo.getBrdno()==null || "".equals(boardInfo.getBrdno()))
-    	boardSvc.insertBoard(boardInfo);
+    	boardSvc.insertBoard(boardInfo, filelist, fileno);
         return "redirect:/Category/FreeBoardList.do";
     }
     @RequestMapping(value = "Category/board1Read")
@@ -60,9 +70,13 @@ public class BoardController {
             String brdno = request.getParameter("brdno");
             boardSvc.updateBoard1Read(brdno);
             boardVO boardInfo = boardSvc.selectBoardOne(brdno);
-            
+            List<?> listview = boardSvc.selectBoard1FileList(brdno);
+            List<?> replylist = boardSvc.selectBoard1ReplyList(brdno);
+
             modelMap.addAttribute("boardInfo", boardInfo);
-            
+            modelMap.addAttribute("listview", listview);
+            modelMap.addAttribute("replylist", replylist);
+
             return "Category/boardRead";
     }
     @RequestMapping(value = "Category/board1Update")
@@ -86,6 +100,15 @@ public class BoardController {
         
         return "redirect:/Category/FreeBoardList.do";
     }
+    @RequestMapping(value = "Category/board1ReplySave")
+    public String board5ReplySave(HttpServletRequest request,HttpSession session,BoardReplyVO boardReplyInfo){
+    	String writer=(String)session.getAttribute("userid");
+    	boardReplyInfo.setRewriter(writer);
+        boardSvc.insertBoardReply(boardReplyInfo);
+
+        return "redirect:/Category/board1Read?brdno=" + boardReplyInfo.getBrdno();
+    }
+
 
 
 
