@@ -22,18 +22,17 @@ public class BoardService {
 	public List<?> selectBoardList(SearchVO param) throws Exception {
         return sqlSession.selectList("board.FreeBoardList",param);
     }
-	@Transactional
 	public void insertBoard(boardVO param, List<FileVO> filelist, String[] fileno) throws Exception {
 
 //	    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 //        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 //        TransactionStatus status = txManager.getTransaction(def);
-        
+        	System.out.println("파라미터란???"+param);
 		try{
-	    	if (param.getBrdno()==null || "".equals(param.getBrdno()))
+	    	if (param.getBrdno()==null ||"".equals(param.getBrdno()))
 	    		 sqlSession.insert("board.FreeBoardInsert", param);
-	    	else sqlSession.update("board.updateBoard1", param);
-	
+	    	else {sqlSession.update("board.updateBoard1", param);
+	    	}
 	    	if (fileno != null) {
 	    	    HashMap p = new HashMap();
 	    	    p.put("fileno", fileno) ;
@@ -72,10 +71,20 @@ public class BoardService {
 		return sqlSession.selectList("board.selectBoard1FileList", param);
     }
 	public void insertBoardReply(BoardReplyVO param) {
-		   if (param.getReno()==null || "".equals(param.getReno())) {
-	            sqlSession.insert("board.insertBoard1Reply", param);
+		 if (param.getReno() == null || "".equals(param.getReno())) {
+	            if (param.getReparent() != null) {
+	                BoardReplyVO replyInfo = sqlSession.selectOne("selectBoard1ReplyParent", param.getReparent());
+	                param.setRedepth(replyInfo.getRedepth());
+	                param.setReorder(replyInfo.getReorder() + 1);
+	                sqlSession.selectOne("updateBoard1ReplyOrder", replyInfo);
+	            } else {
+	                Integer reorder = sqlSession.selectOne("selectBoard1ReplyMaxOrder", param.getBrdno());
+	                param.setReorder(reorder);
+	            }
+	            
+	            sqlSession.insert("insertBoard1Reply", param);
 	        } else {
-	            sqlSession.insert("board.updateBoard1Reply", param);
+	            sqlSession.insert("updateBoard1Reply", param);
 	        }
 	}
 	public List<?> selectBoard1ReplyList(String param) {

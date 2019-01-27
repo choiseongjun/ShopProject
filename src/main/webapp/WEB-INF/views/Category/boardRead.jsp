@@ -65,7 +65,29 @@ function fn_replyUpdateCancel(){
 	oldReno.innerText = updateRememo;
 	updateReno = updateRememo = null;
 } 
-
+function fn_replyReplySave(){
+	var form = document.form3;
+	
+	
+	
+	form.action="board1ReplySave";
+	form.submit();	
+}
+function fn_replyReply(reno){
+	var form = document.form3;
+	var reply = document.getElementById("reply"+reno);
+	var replyDia = document.getElementById("replyDialog");
+	replyDia.style.display = "";
+	
+	if (updateReno) {
+		fn_replyUpdateCancel();
+	} 
+	
+	form.rememo.value = "";
+	form.reparent.value=reno;
+	reply.appendChild(replyDia);
+	form.rewriter.focus();
+} 
 </script>
 <body>
 	<center>
@@ -102,8 +124,9 @@ function fn_replyUpdateCancel(){
 				</tr>
 			</tbody>
 		</table>
+
 		<a href="#" onclick="history.back(-1)">돌아가기</a> <a
-			href="/Category/board1Delete?brdno=<c:out value="${boardInfo.brdno}"/>">삭제</a>
+			href="/Category/board1Delete?bgno=<c:out value="${boardInfo.bgno}"/>&brdno=<c:out value="${boardInfo.brdno}"/>">삭제</a>
 		<a
 			href="/Category/board1Form?brdno=<c:out value="${boardInfo.brdno}"/>">수정</a>
 		<p>&nbsp;</p>
@@ -117,17 +140,18 @@ function fn_replyUpdateCancel(){
 		</div>
 		
 		<c:forEach var="replylist" items="${replylist}" varStatus="status">
-			<div style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;">	
+			<div style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px; margin-left: <c:out value="${20*replylist.redepth}"/>px; display: inline-block">	
 				<c:out value="${replylist.rewriter}"/> <c:out value="${replylist.redate}"/>
 				<a href="#" onclick="fn_replyDelete('<c:out value="${replylist.reno}"/>')">삭제</a>
 				<a href="#" onclick="fn_replyUpdate('<c:out value="${replylist.reno}"/>')">수정</a>
+				<a href="#" onclick="fn_replyReply('<c:out value="${replylist.reno}"/>')">댓글</a>
 				<br/>
 				<div id="reply<c:out value="${replylist.reno}"/>"><c:out value="${replylist.rememo}"/></div>
-			</div>
+			</div><br/>
 		</c:forEach>
 
 		<div id="replyDiv" style="width: 99%; display:none">
-			<form name="form2" action="/Category/board1ReplySave" method="post">
+			<form name="form2" action="board6ReplySave" method="post">
 				<input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>"> 
 				<input type="hidden" name="reno"> 
 				<textarea name="rememo" rows="3" cols="60" maxlength="500"></textarea>
@@ -135,7 +159,18 @@ function fn_replyUpdateCancel(){
 				<a href="#" onclick="fn_replyUpdateCancel()">취소</a>
 			</form>
 		</div>
-	</center>
+		
+		<div id="replyDialog" style="width: 99%; display:none">
+			<form name="form3" action="board6ReplySave" method="post">
+				<input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>"> 
+				<input type="hidden" name="reno"> 
+				<input type="hidden" name="reparent"> 
+				작성자: <input type="text" name="rewriter" size="20" maxlength="20"> <br/>
+				<textarea name="rememo" rows="3" cols="60" maxlength="500"></textarea>
+				<a href="#" onclick="fn_replyReplySave()">저장</a>
+				<a href="#" onclick="fn_replyReplyCancel()">취소</a>
+			</form>
+		</div>		
 </body>
 
 </html>

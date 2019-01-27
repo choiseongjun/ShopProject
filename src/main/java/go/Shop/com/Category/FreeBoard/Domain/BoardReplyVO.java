@@ -17,6 +17,9 @@ public class BoardReplyVO {
 	    private String rememo;
 
 	    private String redate;
+	    private String reparent;
+	    private String redepth;
+	    private Integer reorder;
 
 
 

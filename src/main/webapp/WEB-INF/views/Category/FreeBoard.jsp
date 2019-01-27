@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <script>
 function fn_formSubmit(){
@@ -15,9 +23,10 @@ function fn_formSubmit(){
 <body>
 <%@include file="../Header.jsp"%>
 <center>
-<a href="/Category/board1Form">글쓰기</a>
-                    
-<table border="1" style="width:600px">
+<!-- <a href="/Category/board1Form">글쓰기</a> -->
+  <a href="board1Form?bgno=<c:out value="${searchVO.bgno}"/>">글쓰기</a>
+
+<table border="1" style="width:1000px" class="table table-striped table-hover" align="middle">
 		<caption>게시판</caption>
 		<colgroup>
 			<col width='8%' />

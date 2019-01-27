@@ -65,8 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 	    web
 	       .ignoring()
-	       .antMatchers("/resources/**", "/static/**","/fonts/**","/css/**", "/js/**", "/img/**");
-	    
+	       .antMatchers("/resources/**", "/static/**","/images/**","/fonts/**","/css/**", "/js/**","/bootstrap/**", "/img/**","/scss/**");
+	     
 	}
  
 }

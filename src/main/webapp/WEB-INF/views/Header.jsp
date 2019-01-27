@@ -105,8 +105,8 @@
 							</div>
 						</li>
 						<li class="has-dropdown megamenu">
-							<a href="#">블로그</a>
-							<div class="dropdown tab-dropdown">
+							<!-- <a href="#">블로그</a> -->
+							<!-- <div class="dropdown tab-dropdown">
 								<div class="row">
 									<div class="col-md-2">
 										<ul class="tab-nav">
@@ -118,10 +118,10 @@
 									</div>
 									<div class="col-md-10">
 										<div class="dropdown-body tab-content">
-											<!-- tab1 -->
+											tab1
 											<div id="tab1" class="tab-pane fade in active">
 												<div class="row">
-													<!-- post -->
+													post
 													<div class="col-md-4">
 														<div class="post post-sm"> 
 															<a class="post-img" href=""><img src="/img/post-10.jpg" alt=""></a>
@@ -137,9 +137,9 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post --> 
+													/post 
 
-													<!-- post -->
+													post
 													<div class="col-md-4">
 														<div class="post post-sm">
 															<a class="post-img" href="blog-post.html"><img src="/img/post-14.jpg" alt=""></a>
@@ -156,9 +156,9 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post -->
+													/post
 
-													<!-- post -->
+													post
 													<div class="col-md-4">
 														<div class="post post-sm">
 															<a class="post-img" href="blog-post.html"><img src="/img/post-13.jpg" alt=""></a>
@@ -174,15 +174,15 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post -->
+													/post
 												</div>
 											</div>
-											<!-- /tab1 -->
+											/tab1
 
-											<!-- tab2 -->
+											tab2
 											<div id="tab2" class="tab-pane fade in">
 												<div class="row">
-													<!-- post -->
+													post
 													<div class="col-md-4">
 														<div class="post post-sm">
 															<a class="post-img" href="blog-post.html"><img src="/img/post-10.jpg" alt=""></a>
@@ -198,9 +198,9 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post -->
+													/post
 
-													<!-- post -->
+													post
 													<div class="col-md-4">
 														<div class="post post-sm">
 															<a class="post-img" href="blog-post.html"><img src="/img/post-8.jpg" alt=""></a>
@@ -217,9 +217,9 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post -->
+													/post
 
-													<!-- post -->
+													post
 													<div class="col-md-4">
 														<div class="post post-sm">
 															<a class="post-img" href="blog-post.html"><img src="/img/post-9.jpg" alt=""></a>
@@ -235,16 +235,16 @@
 															</div>
 														</div>
 													</div>
-													<!-- /post -->
+													/post
 												</div>
 											</div>
-											<!-- /tab2 -->
+											/tab2
 
-											<!-- /tab3 tab4 .. -->
+											/tab3 tab4 ..
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</li>
 						<li class="has-dropdown megamenu">
 							<a href="#">종합</a>
@@ -254,8 +254,8 @@
 										<div class="col-md-3">
 											<h4 class="dropdown-heading">자유</h4>
 											<ul class="dropdown-list">
-												<li><a href="/Category/FreeBoardList.do">자유게시판</a></li>
-												<li><a href="/Category/FreeBoardList.do">입문Tip 게시판</a></li>
+												<li><a href="/Category/FreeBoardList.do?bgno=1">자유게시판</a></li>
+												<li><a href="/Category/FreeBoardList.do?bgno=2">입문Tip 게시판</a></li>
 												<li><a href="#">질문&답변</a></li>
 												<li><a href="#">사고 Q&A</a></li>
 												<li><a href="#">국산바이크게시판</a></li>

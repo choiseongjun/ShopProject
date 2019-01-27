@@ -58,6 +58,7 @@
 				</tr>
 			</tbody>
 			</table>
+			<input type="hidden" name="bgno" value="<c:out value="${bgno}"/>"> 
 			<input type="hidden" name="brdno"
 				value="<c:out value="${boardInfo.brdno}"/>"> <a href="#"
 				onclick="form1.submit()">저장</a>

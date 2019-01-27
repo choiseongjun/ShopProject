@@ -5,14 +5,15 @@
   
 <mapper namespace="board">
 
-   <sql id="includeBoard">
-		WHERE BRDDELETEFLAG='N'
-         <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
-			  <foreach item="item" index="index" collection="searchTypeArr">
-			        AND ${item} LIKE CONCAT('%', #{searchKeyword},'%' )
-			  </foreach>
-		</if>	           
-    </sql>
+  <sql id="includeBoard">
+     WHERE BGNO=#{bgno} AND BRDDELETEFLAG='N'
+     <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+          <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
+             ${item} LIKE CONCAT('%', #{searchKeyword},'%' )
+          </foreach>
+    </if>               
+</sql>
+
 
 
        <select id="FreeBoardList" resultType="go.Shop.com.Category.FreeBoard.Domain.boardVO"  parameterType="go.Shop.com.Configuration.SearchVO">
@@ -25,9 +26,13 @@
         </select> 
     
      <insert id="FreeBoardInsert" parameterType="go.Shop.com.Category.FreeBoard.Domain.boardVO" >
-    	INSERT INTO TBL_BOARD(BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
-		VALUES (#{brdtitle}, #{brdwriter}, #{brdmemo}, NOW(), 0, 'N' )
-	</insert>
+	<selectKey resultType="String" keyProperty="brdno" order="BEFORE">
+            SELECT IFNULL(MAX(BRDNO),0)+1 FROM TBL_BOARD
+        </selectKey>
+    
+     INSERT INTO TBL_BOARD(BGNO, BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
+        VALUES (#{bgno}, #{brdno}, #{brdtitle}, #{brdwriter}, #{brdmemo}, NOW(), 0, 'N' )
+    </insert>
               <update id="updateBoard1" parameterType="go.Shop.com.Category.FreeBoard.Domain.boardVO">
         UPDATE TBL_BOARD
            SET BRDTITLE=#{brdtitle}
@@ -37,7 +42,7 @@
            AND BRDNO=#{brdno}
     </update> 
     <select id="selectBoard1One" parameterType="String" resultType="go.Shop.com.Category.FreeBoard.Domain.boardVO">
-        SELECT BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, DATE_FORMAT(BRDDATE,'%Y-%m-%d') BRDDATE
+        SELECT BGNO,BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, DATE_FORMAT(BRDDATE,'%Y-%m-%d') BRDDATE
           FROM TBL_BOARD
          WHERE BRDDELETEFLAG='N'
            AND BRDNO=#{brdno}
@@ -66,8 +71,8 @@
     </select> 
 
     <insert id="insertBoard1File" parameterType="go.Shop.com.Category.FreeBoard.Domain.FileVO" >
-     	INSERT INTO TBL_BOARDFILE (BRDNO, FILENAME, REALNAME, FILESIZE)
-        VALUES (#{parentPK}, #{filename}, #{realname}, #{filesize})
+         INSERT INTO TBL_BOARD(BGNO, BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
+        VALUES (#{bgno}, #{brdno}, #{brdtitle}, #{brdwriter}, #{brdmemo}, NOW(), 0, 'N' )
 	</insert>
     <delete id="deleteBoard1File" parameterType="hashmap"> 
         DELETE 
@@ -90,8 +95,13 @@
             SELECT IFNULL(MAX(RENO),0)+1 FROM TBL_BOARDREPLY
         </selectKey>
             
-        INSERT INTO TBL_BOARDREPLY(BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE)
-        VALUES (#{brdno}, #{reno}, #{rewriter}, 'N', #{rememo}, NOW())
+          INSERT INTO TBL_BOARDREPLY(BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE, REORDER, REPARENT, REDEPTH)
+        VALUES (#{brdno}, #{reno}, #{rewriter}, 'N', #{rememo}, NOW(), #{reorder},
+                   <choose>
+                       <when test="reparent==null">#{reno}, 0</when>
+                       <otherwise>#{reparent}, #{redepth}</otherwise>
+                   </choose>
+               )
     </insert>
 
     <update id="deleteBoard1Reply" parameterType="String"> 
@@ -104,5 +114,15 @@
         UPDATE TBL_BOARDREPLY
            SET REMEMO=#{rememo} 
          WHERE RENO=#{reno}
+    </update> 
+     <select id="selectBoard1ReplyParent" resultType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO" parameterType="String">
+        SELECT BRDNO, REDEPTH+1 REDEPTH, REORDER 
+          FROM TBL_BOARDREPLY
+         WHERE RENO=#{reparent}
+    </select>
+     <update id="updateBoard1ReplyOrder" parameterType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO"> 
+        UPDATE TBL_BOARDREPLY
+           SET REORDER = REORDER + 1 
+         WHERE BRDNO=#{brdno} AND REORDER>#{reorder}       
     </update> 
 </mapper> 

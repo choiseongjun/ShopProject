@@ -26,7 +26,12 @@ public class BoardController {
 
     @RequestMapping(value = "Category/FreeBoardList.do")
     public String boardList(SearchVO searchVO,ModelMap modelMap) throws Exception {
-    	  searchVO.pageCalculate( boardSvc.selectBoardCount(searchVO) ); 
+    	  
+    	   if (searchVO.getBgno() == null) {
+               searchVO.setBgno("1"); 
+           }
+
+    	searchVO.pageCalculate( boardSvc.selectBoardCount(searchVO) ); 
 
           List<?> listview   = boardSvc.selectBoardList(searchVO);
 
@@ -37,15 +42,21 @@ public class BoardController {
     }
     @RequestMapping(value = "Category/board1Form")
     public String boardForm(HttpServletRequest request, ModelMap modelMap) throws Exception {
-        String brdno = request.getParameter("brdno");
+    
+    	String bgno = request.getParameter("bgno");
+    	System.out.println("파라미터값+++++++="+bgno);
+    	String brdno = request.getParameter("brdno");
         if (brdno!=null) {
         	boardVO boardInfo = boardSvc.selectBoardOne(brdno);
         	List<?> listview = boardSvc.selectBoard1FileList(brdno);
              
          	modelMap.addAttribute("boardInfo", boardInfo);
         	modelMap.addAttribute("listview", listview);
+            bgno = boardInfo.getBgno();
+
         }
-        
+        modelMap.addAttribute("bgno", bgno);
+
         return "Category/FreeboardForm";
 }
 
@@ -53,16 +64,17 @@ public class BoardController {
   
     @RequestMapping(value = "Category/FreeBoardSave")
     public String boardSave(HttpServletRequest request,@ModelAttribute boardVO boardInfo,HttpSession session) throws Exception {
-	String[] fileno = request.getParameterValues("fileno");
+	
+    	String[] fileno = request.getParameterValues("fileno");
     	
 	   FileUtil fs = new FileUtil();
 	 
 	   List<FileVO> filelist = fs.saveAllFiles(boardInfo.getUploadfile());
 
-    	String writer=(String)session.getAttribute("userid");
+	   String writer=(String)session.getAttribute("userid");
     	boardInfo.setBrdwriter(writer);
     	boardSvc.insertBoard(boardInfo, filelist, fileno);
-        return "redirect:/Category/FreeBoardList.do";
+        return "redirect:/Category/FreeBoardList.do?bgno="+boardInfo.getBgno();
     }
     @RequestMapping(value = "Category/board1Read")
     public String boardRead(HttpServletRequest request, ModelMap modelMap) throws Exception {
@@ -94,13 +106,14 @@ public class BoardController {
     @RequestMapping(value = "Category/board1Delete")
    	public String boardDelete(HttpServletRequest request) throws Exception {
     	
+    	
     	String brdno = request.getParameter("brdno");
     	System.out.println("로그");
     	boardSvc.deleteBoardOne(brdno);
         
         return "redirect:/Category/FreeBoardList.do";
     }
-    @RequestMapping(value = "Category/board1ReplySave")
+    @RequestMapping(value = "board1ReplySave")
     public String board5ReplySave(HttpServletRequest request,HttpSession session,BoardReplyVO boardReplyInfo){
     	String writer=(String)session.getAttribute("userid");
     	boardReplyInfo.setRewriter(writer);

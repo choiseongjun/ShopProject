@@ -7,8 +7,19 @@ import org.springframework.web.multipart.MultipartFile;
 import go.Shop.com.Configuration.utiletc;
 
 public class boardVO {
+	 private String bgno;
+	 private String brdno, brdtitle, brdwriter, brdmemo, brddate,brdhit, brddeleteflag,filecnt;
+		
+	 
+	 public String getBgno() {
+		return bgno;
+	}
+
+	public void setBgno(String bgno) {
+		this.bgno = bgno;
+	}
+
 	
-	private String brdno, brdtitle, brdwriter, brdmemo, brddate,brdhit, brddeleteflag,filecnt;
 	public String getFilecnt() {
 		return filecnt;
 	}
