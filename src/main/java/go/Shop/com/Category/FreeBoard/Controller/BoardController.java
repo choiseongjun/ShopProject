@@ -113,13 +113,13 @@ public class BoardController {
         
         return "redirect:/Category/FreeBoardList.do";
     }
-    @RequestMapping(value = "board1ReplySave")
-    public String board5ReplySave(HttpServletRequest request,HttpSession session,BoardReplyVO boardReplyInfo){
+    @RequestMapping(value = "Category/board1ReplySave")
+    public String board5ReplySave(HttpServletRequest request,HttpSession session,BoardReplyVO boardReplyInfo,boardVO boardInfo){
     	String writer=(String)session.getAttribute("userid");
     	boardReplyInfo.setRewriter(writer);
         boardSvc.insertBoardReply(boardReplyInfo);
-
-        return "redirect:/Category/board1Read?brdno=" + boardReplyInfo.getBrdno();
+        System.out.println("댓글달았음.........");
+        return "redirect:/Category/FreeBoardList.do?bgno="+boardInfo.getBgno();
     }
 
 

@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="/css/core-style.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
@@ -24,10 +25,9 @@ function fn_formSubmit(){
 <%@include file="../Header.jsp"%>
 <center>
 <!-- <a href="/Category/board1Form">글쓰기</a> -->
-  <a href="board1Form?bgno=<c:out value="${searchVO.bgno}"/>">글쓰기</a>
-
-<table border="1" style="width:1000px" class="table table-striped table-hover" align="middle">
-		<caption>게시판</caption>
+  
+<table  style="width:800px" height="100%" class="table table-striped table-hover" align="middle">
+	<!-- 	<caption>게시판</caption> -->
 		<colgroup>
 			<col width='8%' />
 			<col width='*%' />
@@ -55,7 +55,7 @@ function fn_formSubmit(){
 					<td>
 					<c:out value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}"/>					
 					</td>
-					<td style="border: 1px solid black; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+					<td style=" max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 					<a href="${link}"><c:out value="${listview.brdtitle}"/></a></td>
 					<td><c:out value="${listview.brdwriter}"/></td>
 					<td><c:out value="${listview.brddate}"/></td>
@@ -63,27 +63,27 @@ function fn_formSubmit(){
 					<td><c:out value="${listview.filecnt}"/></td>
 				</tr>
 			</c:forEach>
+			
 		</tbody>
 
 	</table>
-	<c:if test="${pageVO.totPage>1}">
-		<div class="paging">
-			<c:forEach var="i" begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" step="1">
-				<c:url var="pageLink" value="board2List">
-					<c:param name="page" value="${i}" />
-				</c:url>						
-	            <c:choose>
-	                <c:when test="${i eq pageVO.page}">
-	                	<c:out value="${i}"/>
-	                </c:when>
-	                <c:otherwise>
-	                	<a href="${pageLink}"><c:out value="${i}"/></a>
-	                </c:otherwise>
-	            </c:choose>
-	        </c:forEach>
-		</div>
-		<br/>
-	</c:if>		
+				<c:if test="${pageVO.totPage>1}">
+						<c:forEach var="i" begin="${pageVO.pageStart}" end="${pageVO.pageEnd}" step="1">
+							<c:url var="pageLink" value="board2List">
+								<c:param name="page" value="${i}" />
+							</c:url>						
+				            <c:choose>
+				                <c:when test="${i eq pageVO.page}">
+				                	<c:out value="${i}"/>
+				                </c:when>
+				                <c:otherwise>
+				                	<li class="page-item"><a href="${pageLink}" class="page-link" href="#"><c:out value="${i}"/></a></li>
+				                </c:otherwise>
+				            </c:choose>
+				        </c:forEach>
+				  <br/>
+				</c:if>	 
+   	<button type="button" id="btnWrite" class="btn btn-success" align="middle" ><a href="board1Form?bgno=<c:out value="${searchVO.bgno}"/>">글쓰기</a></button>
 	<form id="form1" name="form1"  method="post">
 	    <jsp:include page="../Common/pagingforSubmit.jsp" />
 	    
@@ -99,4 +99,13 @@ function fn_formSubmit(){
 
 </center>
 </body>
+ <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="/js/plugins.js"></script>
+    <!-- Classy Nav js -->
+    <script src="/js/classy-nav.min.js"></script>
+    <!-- Active js -->
+    <script src="/js/active.js"></script>
 </html>

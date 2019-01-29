@@ -5,6 +5,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/core-style.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <%@ page session="true"%>
 <html>
 <head>
@@ -55,7 +62,9 @@
 
 					<!-- logo -->
 					<div class="nav-logo">
-						<a href="/" class="logo"><img src="/img/logo.png" alt=""></a>
+						<!-- <a href="/" class="logo"><img src="/img/logo.png" alt=""></a> -->
+						<a href="/"><h1>바이크모아</h1></a>
+						
 					</div>
 					<!-- /logo -->
 
@@ -256,17 +265,17 @@
 											<ul class="dropdown-list">
 												<li><a href="/Category/FreeBoardList.do?bgno=1">자유게시판</a></li>
 												<li><a href="/Category/FreeBoardList.do?bgno=2">입문Tip 게시판</a></li>
-												<li><a href="#">질문&답변</a></li>
-												<li><a href="#">사고 Q&A</a></li>
-												<li><a href="#">국산바이크게시판</a></li>
-												<li><a href="#">해외바이크게시판</a></li>
+												<li><a href="/Category/FreeBoardList.do?bgno=3">질문&답변</a></li>
+												<li><a href="/Category/FreeBoardList.do?bgno=4">사고 Q&A</a></li>
+												<li><a href="/Category/FreeBoardList.do?bgno=5">국산바이크게시판</a></li>
+												<li><a href="/Category/FreeBoardList.do?bgno=6">해외바이크게시판</a></li>
 											<li><a href="#">분실및도난</a></li>
 											</ul>
 										</div>
 										<div class="col-md-3">
 											<h4 class="dropdown-heading">중고거래</h4>
 											<ul class="dropdown-list">
-												<li><a href="#">센터매물</a></li>
+												<li><a href="/Category/DealBoardList.do">센터매물</a></li>
 												<li><a href="#">개인매물</a></li>
 												<li><a href="#">바이크 부품</a></li>
 												<li><a href="#">튜닝용품</a></li>
@@ -311,9 +320,9 @@
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Technology</a></li>
+					<!-- 	<li><a href="#">Technology</a></li>
 						<li><a href="#">Health</a></li>
-						<li><a href="#">Travel</a></li>
+						<li><a href="#">Travel</a></li> -->
 					</ul>
 					<!-- /nav -->
 				</div>

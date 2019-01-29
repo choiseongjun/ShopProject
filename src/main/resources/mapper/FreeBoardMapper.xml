@@ -71,8 +71,8 @@
     </select> 
 
     <insert id="insertBoard1File" parameterType="go.Shop.com.Category.FreeBoard.Domain.FileVO" >
-         INSERT INTO TBL_BOARD(BGNO, BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
-        VALUES (#{bgno}, #{brdno}, #{brdtitle}, #{brdwriter}, #{brdmemo}, NOW(), 0, 'N' )
+      INSERT INTO TBL_BOARDFILE (BRDNO, FILENAME, REALNAME, FILESIZE)
+		VALUES (#{parentPK}, #{filename}, #{realname}, #{filesize})
 	</insert>
     <delete id="deleteBoard1File" parameterType="hashmap"> 
         DELETE 
@@ -125,4 +125,11 @@
            SET REORDER = REORDER + 1 
          WHERE BRDNO=#{brdno} AND REORDER>#{reorder}       
     </update> 
+    
+    <select id="selectBoard1ReplyMaxOrder" resultType="Integer" parameterType="String">
+        SELECT IFNULL(MAX(REORDER),0)+1
+          FROM TBL_BOARDREPLY
+         WHERE BRDNO=#{brdno}
+    </select>
+
 </mapper> 

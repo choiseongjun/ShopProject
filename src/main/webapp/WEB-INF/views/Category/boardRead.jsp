@@ -92,7 +92,7 @@ function fn_replyReply(reno){
 <body>
 	<center>
 		<table border="1" style="width: 600px">
-			<caption>게시판</caption>
+			<!-- <caption>게시판</caption> -->
 			<colgroup>
 				<col width='15%' />
 				<col width='*%' />
