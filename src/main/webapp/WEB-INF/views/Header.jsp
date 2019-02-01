@@ -275,7 +275,7 @@
 										<div class="col-md-3">
 											<h4 class="dropdown-heading">중고거래</h4>
 											<ul class="dropdown-list">
-												<li><a href="/Category/DealBoardList.do">센터매물</a></li>
+												<li><a href="/Multi/FreeBoardList.do?bgno=1">센터매물</a></li>
 												<li><a href="#">개인매물</a></li>
 												<li><a href="#">바이크 부품</a></li>
 												<li><a href="#">튜닝용품</a></li>

@@ -9,9 +9,17 @@ import go.Shop.com.Configuration.utiletc;
 public class boardVO {
 	 private String bgno;
 	 private String brdno, brdtitle, brdwriter, brdmemo, brddate,brdhit, brddeleteflag,filecnt;
-		
+	 private String REALNAME;
 	 
-	 public String getBgno() {
+	 public String getREALNAME() {
+		return REALNAME;
+	}
+
+	public void setREALNAME(String rEALNAME) {
+		REALNAME = rEALNAME;
+	}
+
+	public String getBgno() {
 		return bgno;
 	}
 

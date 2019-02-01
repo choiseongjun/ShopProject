@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="DealBoard">
+
+  <sql id="includeBoard">
+     WHERE BGNO=#{bgno} AND BRDDELETEFLAG='N'
+     <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+          <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
+             ${item} LIKE CONCAT('%', #{searchKeyword},'%' )
+          </foreach>
+    </if>               
+</sql>
+
+
+
+       <select id="FreeBoardList" resultType="go.Shop.com.Category.FreeBoard.Domain.boardVO"  parameterType="go.Shop.com.Configuration.SearchVO">
+            SELECT BRDNO, BRDTITLE, BRDWRITER, DATE_FORMAT(BRDDATE,'%Y-%m-%d') BRDDATE, BRDHIT
+                  , (SELECT COUNT(*) FROM TBL_BOARDFILE WHERE BRDNO=TB.BRDNO) FILECNT
+                  ,(SELECT REALNAME FROM MULTI_BOARDFILE  WHERE BRDNO=TB.BRDNO) REALNAME
+          FROM MULTI_BOARD TB
+         <include refid="includeBoard"/>
+         ORDER BY BRDNO DESC 
+         LIMIT ${rowStart-1}, 10
+        </select> 
+    
+     <insert id="FreeBoardInsert" parameterType="go.Shop.com.Category.FreeBoard.Domain.boardVO" >
+	<selectKey resultType="String" keyProperty="brdno" order="BEFORE">
+            SELECT IFNULL(MAX(BRDNO),0)+1 FROM MULTI_BOARD
+        </selectKey>
+    
+     INSERT INTO MULTI_BOARD(BGNO, BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
+        VALUES (#{bgno}, #{brdno}, #{brdtitle}, #{brdwriter}, #{brdmemo}, NOW(), 0, 'N' )
+    </insert>
+              <update id="updateBoard1" parameterType="go.Shop.com.Category.FreeBoard.Domain.boardVO">
+        UPDATE MULTI_BOARD
+           SET BRDTITLE=#{brdtitle}
+             , BRDWRITER=#{brdwriter}
+             , BRDMEMO=#{brdmemo} 
+         WHERE BRDDELETEFLAG='N'
+           AND BRDNO=#{brdno}
+    </update> 
+    <select id="selectBoard1One" parameterType="String" resultType="go.Shop.com.Category.FreeBoard.Domain.boardVO">
+        SELECT BGNO,BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, DATE_FORMAT(BRDDATE,'%Y-%m-%d') BRDDATE
+          FROM MULTI_BOARD
+         WHERE BRDDELETEFLAG='N'
+           AND BRDNO=#{brdno}
+    </select> 
+     <update id="updateBoard1Read" parameterType="String">
+        UPDATE MULTI_BOARD
+           SET BRDHIT = BRDHIT + 1 
+         WHERE BRDNO=#{brdno}
+    </update> 
+
+       <delete id="deleteBoard1One" parameterType="String">
+        UPDATE MULTI_BOARD
+           SET BRDDELETEFLAG='Y' 
+         WHERE BRDNO=#{brdno}
+    </delete> 
+    <select id="selectBoard1Count" resultType="Integer" parameterType="go.Shop.com.Configuration.SearchVO">
+        SELECT COUNT(*)
+          FROM MULTI_BOARD
+          <include refid="includeBoard"/>
+    </select>
+    <select id="selectBoard1FileList" resultType="go.Shop.com.Category.FreeBoard.Domain.FileVO" parameterType="String">
+        SELECT FILENO, FILENAME, REALNAME, FILESIZE
+          FROM MULTI_BOARDFILE
+         WHERE BRDNO=#{brdno}
+         ORDER BY FILENO DESC 
+    </select> 
+
+    <insert id="insertBoard1File" parameterType="go.Shop.com.Category.FreeBoard.Domain.FileVO" >
+      INSERT INTO MULTI_BOARDFILE (BRDNO, FILENAME, REALNAME, FILESIZE)
+		VALUES (#{parentPK}, #{filename}, #{realname}, #{filesize})
+	</insert>
+    <delete id="deleteBoard1File" parameterType="hashmap"> 
+        DELETE 
+          FROM MULTI_BOARDFILE
+         WHERE FILENO IN (
+			  <foreach item="item" index="index" collection="fileno" separator=",">
+		        	 ${item}
+			  </foreach>  
+		)	         
+    </delete> 
+   <select id="selectBoard1ReplyList" resultType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO" parameterType="String">
+        SELECT BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE 
+          FROM MULTI_BOARDREPLY
+         WHERE BRDNO=#{brdno} AND REDELETEFLAG='N'
+         ORDER BY RENO
+    </select>
+        
+    <insert id="insertBoard1Reply" parameterType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO" >
+        <selectKey resultType="String" keyProperty="reno" order="BEFORE">
+            SELECT IFNULL(MAX(RENO),0)+1 FROM MULTI_BOARDREPLY
+        </selectKey>
+            
+          INSERT INTO MULTI_BOARDREPLY(BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE, REORDER, REPARENT, REDEPTH)
+        VALUES (#{brdno}, #{reno}, #{rewriter}, 'N', #{rememo}, NOW(), #{reorder},
+                   <choose>
+                       <when test="reparent==null">#{reno}, 0</when>
+                       <otherwise>#{reparent}, #{redepth}</otherwise>
+                   </choose>
+               )
+    </insert>
+
+    <update id="deleteBoard1Reply" parameterType="String"> 
+        UPDATE MULTI_BOARDREPLY
+           SET REDELETEFLAG='Y' 
+         WHERE RENO=#{reno}       
+    </update> 
+
+    <update id="updateBoard1Reply" parameterType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO">
+        UPDATE MULTI_BOARDREPLY
+           SET REMEMO=#{rememo} 
+         WHERE RENO=#{reno}
+    </update> 
+     <select id="selectBoard1ReplyParent" resultType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO" parameterType="String">
+        SELECT BRDNO, REDEPTH+1 REDEPTH, REORDER 
+          FROM MULTI_BOARDREPLY
+         WHERE RENO=#{reparent}
+    </select>
+     <update id="updateBoard1ReplyOrder" parameterType="go.Shop.com.Category.FreeBoard.Domain.BoardReplyVO"> 
+        UPDATE MULTI_BOARDREPLY
+           SET REORDER = REORDER + 1 
+         WHERE BRDNO=#{brdno} AND REORDER>#{reorder}       
+    </update> 
+    
+    <select id="selectBoard1ReplyMaxOrder" resultType="Integer" parameterType="String">
+        SELECT IFNULL(MAX(REORDER),0)+1
+          FROM MULTI_BOARDREPLY
+         WHERE BRDNO=#{brdno}
+    </select>
+
+</mapper> 

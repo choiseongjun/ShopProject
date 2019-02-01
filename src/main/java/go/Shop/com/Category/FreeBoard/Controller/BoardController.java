@@ -25,8 +25,8 @@ public class BoardController {
 	
 
     @RequestMapping(value = "Category/FreeBoardList.do")
-    public String boardList(SearchVO searchVO,ModelMap modelMap) throws Exception {
-    	  
+    public String boardList(SearchVO searchVO,ModelMap modelMap,HttpServletRequest request) throws Exception {
+    	 String brdno = request.getParameter("brdno");
     	   if (searchVO.getBgno() == null) {
                searchVO.setBgno("1"); 
            }
@@ -34,7 +34,7 @@ public class BoardController {
     	searchVO.pageCalculate( boardSvc.selectBoardCount(searchVO) ); 
 
           List<?> listview   = boardSvc.selectBoardList(searchVO);
-
+          List<?> listFileview = boardSvc.selectBoard1FileList(brdno);
         modelMap.addAttribute("listview", listview);
         modelMap.addAttribute("searchVO", searchVO);
 
@@ -52,6 +52,7 @@ public class BoardController {
              
          	modelMap.addAttribute("boardInfo", boardInfo);
         	modelMap.addAttribute("listview", listview);
+        	modelMap.addAttribute("listFileview", listview);
             bgno = boardInfo.getBgno();
 
         }

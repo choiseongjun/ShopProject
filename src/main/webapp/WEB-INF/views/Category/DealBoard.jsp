@@ -86,7 +86,7 @@
                                 </ul>
                             </div>
                         </div>
-
+   	<button type="button" id="btnWrite" class="btn btn-success" align="middle" ><a href="board1Form?bgno=<c:out value="${searchVO.bgno}"/>">글쓰기</a></button>
                         <!-- ##### Single Widget ##### -->
                         <div class="widget price mb-50">
                             <!-- Widget Title -->
@@ -172,15 +172,19 @@
                         </div>
 
                         <div class="row">
-
+                      <table width="1000">
+						<c:forEach var="listview" items="${listview}" varStatus="status" >	
+										<c:url var="link" value="/Category/board1Read">
+											<c:param name="brdno" value="${listview.brdno}" />
+										</c:url>		
                             <!-- Single Product -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="/img/product-img/ninja450.jpg" width="250px", height="250px">
+                                        <img src="/UploadImage/2019/${listview.REALNAME}" width="250px", height="250px">
                                         <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/ninja450.jpg" alt="" >
+                                        <img class="hover-img" src="/UploadImage/2019/${listview.REALNAME}" alt="" >
 
                                         <!-- Product Badge -->
                                         <div class="product-badge offer-badge">
@@ -194,9 +198,9 @@
 
                                     <!-- Product Description -->
                                     <div class="product-description">
-                                        <span>[서울]닌자450R 팝니다!!</span>
+                                        <span><a href="${link}"><c:out value="${listview.brdtitle}"/></a></span>
                                         <a href="single-product-details.html">
-                                            <h6>최성준</h6>
+                                            <h6><c:out value="${listview.brdwriter}"/></h6>
                                         </a>
                                         <p class="product-price"><span class="old-price">260만원</span>240만원</p>
 
@@ -210,303 +214,11 @@
                                     </div>
                                 </div>
                             </div>
- 						<!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/CBR250RR.jpg" width="450px", height="450px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/CBR250RR.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]CBR250RR 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">1050만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/CBR1000RR.jpg"  width="450px", height="450px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/CBR1000RR.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]CBR1000RR 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">1050만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                          <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/ninja450.jpg" width="250px", height="250px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/ninja450.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]닌자450R 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">260만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
- 						<!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/CBR250RR.jpg" width="450px", height="450px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/CBR250RR.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]CBR250RR 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">1050만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/CBR1000RR.jpg"  width="450px", height="450px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/CBR1000RR.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]CBR1000RR 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">1050만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/ninja450.jpg" width="250px", height="250px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/ninja450.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]닌자450R 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">260만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
- 						<!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/CBR250RR.jpg" width="450px", height="450px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/CBR250RR.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]CBR250RR 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">1050만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="/img/product-img/CBR1000RR.jpg"  width="450px", height="450px">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="/img/product-img/CBR1000RR.jpg" alt="" >
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>[서울]CBR1000RR 팝니다!!</span>
-                                        <a href="single-product-details.html">
-                                            <h6>최성준</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">1050만원</span>240만원</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+ 						
 
                         </div>
+                        </c:forEach>
+                       </table>
                     </div>
                     <!-- Pagination -->
                     <nav aria-label="navigation">
