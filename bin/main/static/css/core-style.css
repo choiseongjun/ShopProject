@@ -46,7 +46,7 @@ a {
   transition: all 500ms ease 0s;
   text-decoration: none;
   outline: 0 solid transparent;
-  color: #fbf5f5;
+  color: #000000;
   font-weight: 600;
   font-size: 12px; }
   a:hover, a:focus {
@@ -66,7 +66,7 @@ ol {
     list-style: none; }
 
 img {
-  height: 250px;
+  height: auto;
   max-width: 100%; }
 
 /* Spacing */
@@ -746,7 +746,7 @@ img {
     z-index: 1;
     overflow: hidden; }
     .single-product-wrapper .product-img img {
-      width: 450PX;
+      width: 100%;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms; }
     .single-product-wrapper .product-img .hover-img {

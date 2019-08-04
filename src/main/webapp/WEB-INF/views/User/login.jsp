@@ -8,6 +8,7 @@
 </head>
 <body>
 <%@ include file="../Header.jsp" %>
+ 
 <script>
 		function findid() {
 			location.href = "${path}/member/findid.do";
@@ -35,10 +36,11 @@
 				document.form1.submit();
 			});
 		});
+		
 	</script>
-	<form name="form1" method="post">
+	<form name="form1" method="post" margin-top="50px">
 		<table width="400" class="table table-bordered" border="0"
-			bordercolor="gray" align="center">
+			bordercolor="gray" align="center" >
 			<tr height="40">
 				<td width="150"><font face="궁서체">아이디</font> <input
 					type="hidden" name="idDuplication" value="IdUncheck"></td>
