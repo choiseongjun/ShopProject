@@ -89,6 +89,12 @@ function fn_replyReply(reno){
 	form.rewriter.focus();
 } 
 </script>
+<style>
+	table{
+		width:600px;
+		margin-top:200px;
+	} 
+</style> 
 <body>
 	<center>
 		<table border="1" style="width: 600px">

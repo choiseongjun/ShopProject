@@ -13,8 +13,8 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <%@ page session="true"%>
-<html>
-<head>
+<html> 
+<head> 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -221,7 +221,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="/"><img src="img/core-img/logo.png" alt=""></a>
+                <a class="nav-brand" href="/"><img src="/img/core-img/logo.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -298,16 +298,23 @@
                 </div>
                 <!-- Favourite Area -->
                 <div class="favourite-area">
-                    <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
-                </div>
+                    <a href="#"><img src="/img/core-img/heart.svg" alt=""></a>
+                </div> 
                 <!-- User Login Info -->
+        
                 <div class="user-login-info">
-
-                    <a href="/login"><img src="img/core-img/user.svg" alt=""></a>
+          <c:choose>
+ 		 <c:when test="${sessionScope.userid==null}">
+                    <a href="/login"><img src="/img/core-img/user.svg" alt=""></a>
+                    </c:when>
+						<c:otherwise>
+						<a href="/member/logout.do"><img src="/img/core-img/user.svg" alt=""></a>
+						</c:otherwise>
+		</c:choose>
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+                    <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""> <span>3</span></a>
                 </div>
             </div>
 

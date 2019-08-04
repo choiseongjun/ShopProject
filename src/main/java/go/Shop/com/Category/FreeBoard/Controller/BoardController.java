@@ -112,7 +112,7 @@ public class BoardController {
     	System.out.println("로그");
     	boardSvc.deleteBoardOne(brdno);
         
-        return "redirect:/Category/FreeBoardList.do";
+        return "redirect:/Multi/DealBoardList.do";
     }
     @RequestMapping(value = "Category/board1ReplySave")
     public String board5ReplySave(HttpServletRequest request,HttpSession session,BoardReplyVO boardReplyInfo,boardVO boardInfo){

@@ -14,9 +14,20 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.row {
+ 
+  margin-top: 50px;
+  
+}
+.product-img{
+	width:200px;
+	
+}
+</style>
 </head>
 <body>
-<%@include file="../Header.jsp"%>
+<%@include file="../Header.jsp"%> 
     <!-- ##### Shop Grid Area Start ##### -->
     <section class="shop_grid_area section-padding-80">
         <div class="container">
@@ -34,16 +45,13 @@
                                 <ul id="menu-content2" >
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#clothing">
-                                        <a href="#">배기량 검색</a>
+                                        <a href="#">언어 검색</a>
                                         <ul  id="clothing">
-                                            <li><a href="#">0CC~125CC</a></li>
-                                            <li><a href="#">125CC~250CC</a></li>
-                                            <li><a href="#">250CC~400CC</a></li>
-                                            <li><a href="#">400CC~650CC </a></li>
-                                            <li><a href="#">650CC~800CC </a></li>
-                                            <li><a href="#">800CC~1000CC</a></li>
-                                            <li><a href="#">1000CC~1200CC</a></li>
-                                            <li><a href="#">1200CC~2000CC</a></li>
+                                            <li><a href="#">Java</a></li>
+                                            <li><a href="#">React</a></li>
+                                            <li><a href="#">Angular</a></li>
+                                            <li><a href="#">Vue </a></li>
+                                            <li><a href="#">C# </a></li>
                                           <!--   <li><a href="#">Shirts &amp; Blouses</a></li>
                                             <li><a href="#">Shirts</a></li>
                                             <li><a href="#">Sweaters &amp; Knits</a></li> -->
@@ -101,7 +109,7 @@
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                     </div>
-                                    <div class="range-price">가격: 0원 - 1억원</div>
+                                    <div class="range-price">좋아요순: 0 - 1억</div>
                                 </div>
                             </div>
                         </div>
@@ -127,8 +135,8 @@
                         </div> -->
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget brands mb-50">
-                            <!-- Widget Title 2 -->
+                        <!-- <div class="widget brands mb-50">
+                            Widget Title 2
                             <p class="widget-title2 mb-30">Brands</p>
                             <div class="widget-desc">
                                 <ul>
@@ -141,7 +149,7 @@
                                     <li><a href="#">듀가티</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -188,7 +196,7 @@
 
                                         <!-- Product Badge -->
                                         <div class="product-badge offer-badge">
-                                            <span>-30%</span>
+                                            <span>나중에 좋아요할꺼</span>
                                         </div>
                                         <!-- Favourite -->
                                         <div class="product-favourite">
@@ -208,7 +216,7 @@
                                         <div class="hover-content">
                                             <!-- Add to Cart -->
                                             <div class="add-to-cart-btn">
-                                                <a href="DealBoardDetail.do" class="btn essence-btn">매물 보러가기</a>
+                                                <a href="DealBoardDetail.do" class="btn essence-btn">구경하러가기</a>
                                             </div>
                                         </div>
                                     </div>

@@ -16,7 +16,7 @@ public class FileUtil {
      * 파일 업로드.
      */
     public List<FileVO> saveAllFiles(List<MultipartFile> upfiles) {
-        String filePath = "D:\\ProjectList\\ShopProject\\src\\main\\resources\\static\\UploadImage\\"; 
+        String filePath = "C:\\Users\\csj27\\git\\ShopProject\\src\\main\\resources\\static\\UploadImage"; 
         List<FileVO> filelist = new ArrayList<FileVO>();
 
         for (MultipartFile uploadfile : upfiles ) {

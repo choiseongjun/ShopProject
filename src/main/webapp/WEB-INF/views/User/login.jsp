@@ -38,7 +38,12 @@
 		});
 		
 	</script>
-	<form name="form1" method="post" margin-top="50px">
+	<style>
+	table{
+		margin-top:300px;
+	} 
+</style> 
+	<form name="form1" method="post" >
 		<table width="400" class="table table-bordered" border="0"
 			bordercolor="gray" align="center" >
 			<tr height="40">

@@ -18,13 +18,17 @@
 		form1.submit();
 	}
 </script>
-
-
+<style>
+	table{
+		width:600px;
+		margin-top:200px;
+	}
+</style>
 <body>
-	<%@include file="../Header.jsp"%>
 	<center>
+	<%@include file="../Header.jsp"%>
 			<form name="form1" action="/Multi/FreeBoardSave" method="post" enctype="multipart/form-data">
-		<table border="1" style="width:600px">
+		<table border="1" >
 			<caption>게시판</caption>
 			<colgroup>
 				<col width='15%' />
