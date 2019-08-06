@@ -1,32 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script>
-	function fn_formSubmit() {
-		var form1 = document.form1;
+<style>
+.fileDrop {
+	width: 80%;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: lightslategrey;
+	margin: auto;
+}
+</style>
 
-		if (form1.brdmemo.value == "") {
-			alert("글 내용을 입력해주세요.");
-			form1.brdmemo.focus();
-			return;
-		}
-		form1.submit();
-	}
+
+ 
+
+<c:if test="${ type eq 'ifr' }">
+<script>
+  console.debug("-------------ifr script!!")
+  parent.setUploadedFile('${ savedFileName }');
 </script>
+</c:if>
 <style>
 	table{
 		width:600px;
 		margin-top:200px;
 	}
 </style>
+<%@include file="../Header.jsp"%>
 <body>
-	<center>
-	<%@include file="../Header.jsp"%>
 			<form name="form1" action="/Multi/FreeBoardSave" method="post" enctype="multipart/form-data">
 		<table border="1" >
 			<caption>게시판</caption>
@@ -67,6 +74,63 @@
 				value="<c:out value="${boardInfo.brdno}"/>"> <a href="#"
 				onclick="form1.submit()">저장</a>
 		</form>
-	</center>
+		   <form action="/uploadForm" id="form1" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" />
+    </form>
+    SavedFileName: ${ savedFileName }
+    
+     
+    <hr />
+    <div class="fileDrop"><p>Drop Hear!!</p></div>
+    <div class="uploadedList"></div>
+     
+    <form action="uploadAjaxes" id="form3" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="type" value="ajax" />
+        <!-- <input type="file" name="file[]" id="ajax-file" style="display:none;" /> -->
+        <input type="file" name="files" id="ajax-file" style="display: none;" />
+        <input type="submit" value="ajax로 제출" />
+    </form>
+    <div id="percent">0 %</div>
+    <div id="status">ready</div>
+    AJAX=SavedFileName:<span id="jax-upfile"></span>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/jQuery/jQuery.form.min.js"></script>  
+<script>
+console.debug("00000");
+window.setUploadedFile=(filename)=>{
+	document.getElementById('upfile').innerHTML=filename;
+	document.getElementById("form2").reset();
+};
+
+const $fileDrop=$('div.fileDrop'),
+		$uploadedList=$('div.uploadedList');
+	
+$fileDrop.on('dragover dragenter',(evt) => {
+	evt.preventDefault();
+});
+$fileDrop.on('drop',(evt) => {
+	evt.preventDefault();//사진 임의적으로 안되게 막아놓는거
+	console.log('drop>>',evt.originalEvent.dataTransfer.files);
+});
+
+const percent=$('#percent'),
+	  status=$('#status');
+$('#form3').ajaxForm({
+	beforeSend: function(){
+		status.empty();
+		percent.html('0%');
+	},
+	uploadProgress: function(event,position,total,percentComplete){
+		status.html('uploading...');
+		var percentVal=percentComplete + '%';
+		percent.html(percentVal);
+	},
+	complete:function(xhr){
+		status.html(xhr.responseText);
+	}
+})
+
+</script>
 </body>
 </html>
