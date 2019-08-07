@@ -66,7 +66,7 @@ public class FileUtils {
 				Scalr.Mode.FIT_TO_HEIGHT, 100);
 		
 		String thumbnailName = dirname + File.separator + "s_" + filename;
-		String ext = getFileExtension(filename);
+		String ext = getFileExtension(filename); 
 		File newFile = new File(thumbnailName);
 		ImageIO.write(destImg, ext.toUpperCase(), newFile);
 		
